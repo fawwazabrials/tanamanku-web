@@ -227,7 +227,7 @@ class Plants extends BaseController
     $temperature = mt_rand(50, 400) / 10.0; // generates float between 5 and 40
     $humidity = mt_rand(0, 1000) / 10.0; // generates float between 0 and 100
     $ph_level = mt_rand(0, 140) / 10.0; // generates float between 0 and 14
-    $quality = ($soil_moisture < 30 || $temperature < 20 || $temperature > 30 || $humidity < 40 || $humidity > 60 || $ph_level < 5.5 || $ph_level > 6.5) ? 'bad' : 'good';
+    $quality = ($soil_moisture < 10 || $temperature < 10 || $temperature > 50 || $humidity < 20 || $humidity > 80 || $ph_level < 3.5 || $ph_level > 9.5) ? 'bad' : 'good';
 
     // update data
     $this->plantsModel->save([
