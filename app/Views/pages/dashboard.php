@@ -13,46 +13,48 @@
       <!-- grafik count Quality -->
       <div class="flex-[3] bg-gray-300 rounded-lg shadow-lg p-5">
         <h1 class="text-xl font-bold">Grafik Quality</h1>
-        <canvas id="qualityChart" style="position: relative;"></canvas>
-        <?php
-        $qualityPlant = "";
-        $countPlant = "";
+        <canvas id="qualityChart" class="h-full w-full">
+          <?php
+          $qualityPlant = "";
+          $countPlant = "";
 
-        foreach ($qualityCount as $row) :
-          $qty = esc($row["quality"]);
-          $qualityPlant .= "'$qty'" . ",";
+          foreach ($qualityCount as $row) :
+            $qty = esc($row["quality"]);
+            $qualityPlant .= "'$qty'" . ",";
 
-          $cnt = esc($row["qualityCount"]);
-          $countPlant .= "'$cnt'" . ",";
-        endforeach;
-        ?>
+            $cnt = esc($row["qualityCount"]);
+            $countPlant .= "'$cnt'" . ",";
+          endforeach;
+          ?>
 
-        <script>
-          var ctx = document.getElementById('qualityChart').getContext('2d');
-          var chart = new Chart(ctx, {
-            type: 'bar',
-            responsive: true,
-            data: {
-              labels: [<?= $qualityPlant ?>],
-              datasets: [{
-                label: 'Kualitas Tanaman',
-                backgroundColor: ['rgb(255,99,132)', 'rgb(14,99,132)'],
-                borderColor: ['rgb(255,991,130)'],
-                data: [<?= $countPlant ?>]
-              }]
-            },
-            options: {
-              scales: {
-                y: {
-                  beginAtZero: true
-                }
+          <script>
+            var ctx = document.getElementById('qualityChart').getContext('2d');
+            var chart = new Chart(ctx, {
+              type: 'bar',
+              responsive: true,
+              data: {
+                labels: [<?= $qualityPlant ?>],
+                datasets: [{
+                  label: 'Kualitas Tanaman',
+                  backgroundColor: ['rgb(255,99,132)', 'rgb(14,99,132)'],
+                  borderColor: ['rgb(255,991,130)'],
+                  data: [<?= $countPlant ?>]
+                }]
               },
-              animation: {
-                duration: 1000
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true
+                  }
+                },
+                animation: {
+                  duration: 1000
+                }
               }
-            }
-          });
-        </script>
+            });
+            // set height and width of chart fit to parent
+          </script>
+        </canvas>
       </div>
       <!-- Top Three Penjualan -->
       <div class="flex-1 flex gap-2 flex-col bg-gray-300 rounded-lg shadow-lg p-5">
@@ -67,46 +69,48 @@
       <!-- grafik count status request -->
       <div class="flex-[3] bg-gray-300 rounded-lg shadow-lg p-5">
         <h1 class="text-xl font-bold">Grafik Status Request</h1>
-        <canvas id="statusChart" style="position: relative;"></canvas>
-        <?php
-        $statusPlant = "";
-        $countStatusPlant = "";
+        <canvas id="statusChart" class="h-full w-full">
+          <?php
+          $statusPlant = "";
+          $countStatusPlant = "";
 
-        foreach ($requestsCount as $row) :
-          $sts = esc($row["status"]);
-          $statusPlant .= "'$sts'" . ",";
+          foreach ($requestsCount as $row) :
+            $sts = esc($row["status"]);
+            $statusPlant .= "'$sts'" . ",";
 
-          $cntStatus = esc($row["statusCount"]);
-          $countStatusPlant .= "'$cntStatus'" . ",";
-        endforeach;
-        ?>
+            $cntStatus = esc($row["statusCount"]);
+            $countStatusPlant .= "'$cntStatus'" . ",";
+          endforeach;
+          ?>
 
-        <script>
-          var ctx = document.getElementById('statusChart').getContext('2d');
-          var chart = new Chart(ctx, {
-            type: 'bar',
-            responsive: true,
-            data: {
-              labels: [<?= $statusPlant ?>],
-              datasets: [{
-                label: 'Status Request Tanaman',
-                backgroundColor: ['rgb(255,99,132)', 'rgb(14,99,132)'],
-                borderColor: ['rgb(255,991,130)'],
-                data: [<?= $countStatusPlant ?>]
-              }]
-            },
-            options: {
-              scales: {
-                y: {
-                  beginAtZero: true
-                }
+          <script>
+            var ctx = document.getElementById('statusChart').getContext('2d');
+            var chart = new Chart(ctx, {
+              type: 'bar',
+              responsive: true,
+              data: {
+                labels: [<?= $statusPlant ?>],
+                datasets: [{
+                  label: 'Status Request Tanaman',
+                  backgroundColor: ['rgb(255,99,132)', 'rgb(14,99,132)'],
+                  borderColor: ['rgb(255,991,130)'],
+                  data: [<?= $countStatusPlant ?>]
+                }]
               },
-              animation: {
-                duration: 1000
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true
+                  }
+                },
+                animation: {
+                  duration: 1000
+                }
               }
-            }
-          });
-        </script>
+            });
+            // set height and width of chart fit to parent
+          </script>
+        </canvas>
 
       </div>
       <!-- Latest Request -->
