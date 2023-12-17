@@ -24,11 +24,13 @@ class Dashboard extends BaseController
 
         $qualityCount = $this->plantsModel->getQualityCount();
         $requestsCount = $this->requestsModel->getStatusCount();
+        $newestPendingRequests = $this->requestsModel->getPendingRequests();
 
         $data = [
             'title' => 'Tanamanku | Dashboard',
             'qualityCount' => $qualityCount,
             'requestsCount' => $requestsCount,
+            'newestPendingRequests' => $newestPendingRequests,
         ];
 
         return view('/pages/dashboard', $data);

@@ -29,10 +29,29 @@
         <canvas id="statusChart"></canvas>
       </div>
       <!-- Latest Request -->
-      <div class="flex-1 flex gap-2 flex-col bg-gray-300 rounded-lg shadow-lg p-5">
+      <div class="flex-1 flex gap-1 flex-col bg-gray-300 rounded-lg shadow-lg p-5">
         <h1 class="text-xl font-bold">Latest Request</h1>
-        <div class="flex grow items-center justify-center">
-          No Data
+        <div class="flex flex-col gap-3 mt-5 overflow-x-hidden <?= $newestPendingRequests == null ? 'justify-center' : '' ?>">
+          <?php if ($newestPendingRequests == null) : ?>
+            <p class="text-center">No Data</p>
+          <?php endif; ?>
+          <?php foreach ($newestPendingRequests as $request) : ?>
+            <?php
+            $timestamp = strtotime($request['created_at']);
+            $formattedDate = date('d-m-Y', $timestamp);
+            $formattedTime = date('H:i:s', $timestamp);
+            ?>
+            <div class="flex justify-between items-stretch">
+              <div class="flex gap-3 items-center">
+                <img src="/img/plants/<?= $request['gambarTanaman'] ?>" alt="admin" class="w-16 h-16 object-cover rounded-lg">
+                <div class="flex flex-col">
+                  <h1 class="font-semibold text-md"><?= $request['namaTanaman'] ?></h1>
+                  <p class="text-sm flex whitespace-nowrap">Requester: <?= $request['nama_requester'] ?></p>
+                  <p class="text-sm">Tanggal: <?= $formattedDate ?>, <?= $formattedTime ?></p>
+                </div>
+              </div>
+            </div>
+          <?php endforeach; ?>
         </div>
       </div>
     </div>

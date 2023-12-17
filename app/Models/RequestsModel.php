@@ -28,7 +28,14 @@ class RequestsModel extends Model
 
   public function getPendingRequests() // buat dashboard admin
   {
-    return $this->where(['status' => 'pending'])->orderBy('createdAt', 'DESC')->findAll();
+    $result = $this->select('requests.*, tanaman.namaTanaman as namaTanaman, tanaman.image as gambarTanaman')
+      ->join('tanaman', 'tanaman.id = requests.tanamanId')
+      ->where(['status' => 'pending'])
+      ->orderBy('requests.created_at', 'DESC')
+      ->limit(3)
+      ->findAll();
+      
+    return $result;
   }
 
   public function insertRequest($data)
