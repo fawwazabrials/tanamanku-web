@@ -2,16 +2,19 @@
 
 namespace App\Controllers;
 
+use App\Models\EditModel;
 use App\Models\PlantsModel;
 use CodeIgniter\I18n\Time;
 
 class Plants extends BaseController
 {
   protected $plantsModel;
+  protected $editModel;
 
   public function __construct()
   {
     $this->plantsModel = new PlantsModel();
+    $this->editModel = new EditModel();
   }
 
   public function index()
@@ -204,7 +207,11 @@ class Plants extends BaseController
       'image' => $namaGambar
     ]);
 
-    // add edit 
+    $this->editModel->save([
+      'adminId' => session()->get('adminId'),
+      'tanamanId' => $id,
+      'createdAt' => Time::now('Asia/Jakarta', 'en_US'),
+    ]);
 
     session()->setFlashdata('message', 'Tanaman ' . $this->request->getVar('namaTanaman') . ' berhasil diubah.');
 

@@ -20,4 +20,18 @@ class Login extends Model
       return 0;
     }
   }
+
+  public function getAdminId($email, $password)
+  {
+    $result = $this->db->table('admin')->select('id')
+      ->where(array('email' => $email, 'password' => $password))
+      ->get()->getRowArray();
+
+    // Check if $result is not null before using count()
+    if ($result !== null && count($result) == 1) {
+      return $result['id'];
+    } else {
+      return 0;
+    }
+  }
 }
