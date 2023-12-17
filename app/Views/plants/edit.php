@@ -35,13 +35,13 @@
                         <p class="text-red-500 text-xs mt-1"><?= $validation_errors['gambar'] ?></p>
                     <?php endif; ?>
                 </div>
-                <div class="flex gap-5 w-full">
+                <div class="flex flex-col md:flex-row gap-5 w-full">
                     <input type="file" class="file-input file-input-bordered w-full" id="gambar" name="gambar" value="<?= old('gambar') ?>">
                     <img alt="preview" class="img-preview h-36 w-36 object-cover object-center border border-gray-300 rounded-md" src="/img/plants/<?= $plant['image'] ?>">
                 </div>
             </label>
             <div class="flex justify-start w-full">
-                <button class="btn btn-primary font-semibold text-xl" type="submit">Submit</button>
+                <button class="btn btn-primary font-semibold text-xl md:mt-0 mt-10 w-full md:w-24" type="submit">Submit</button>
             </div>
         </form>
     </div>
