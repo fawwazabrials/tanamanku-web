@@ -3,7 +3,7 @@
 
 <?= $this->section("content") ?>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/assets/js/Chart.bundle.min.js"></script>
 
 <div class="p-10 h-screen flex flex-col gap-10 grow">
   <div class="flex flex-col gap-5 grow h-full">
@@ -13,52 +13,46 @@
       <!-- grafik count Quality -->
       <div class="flex-[3] bg-gray-300 rounded-lg shadow-lg p-5">
         <h1 class="text-xl font-bold">Grafik Quality</h1>
-        <canvas id="qualityChart" class="relative">
-          <?php
-          $qualityPlant = "";
-          $countPlant = "";
+        <canvas id="qualityChart" style="position: relative;"></canvas>
+        <?php
+        $qualityPlant = "";
+        $countPlant = "";
 
-          foreach ($qualityCount as $row) :
-            $qty = esc($row["quality"]);
-            $qualityPlant .= "'$qty'" . ",";
+        foreach ($qualityCount as $row) :
+          $qty = esc($row["quality"]);
+          $qualityPlant .= "'$qty'" . ",";
 
-            $cnt = esc($row["qualityCount"]);
-            $countPlant .= "'$cnt'" . ",";
-          endforeach;
-          ?>
+          $cnt = esc($row["qualityCount"]);
+          $countPlant .= "'$cnt'" . ",";
+        endforeach;
+        ?>
 
-          <script>
-            var ctx = document.getElementById('qualityChart').getContext('2d');
-            var chart = new Chart(ctx, {
-              type: 'bar',
-              responsive: true,
-              data: {
-                labels: [<?= $qualityPlant ?>],
-                datasets: [{
-                  label: 'Kualitas Tanaman',
-                  backgroundColor: ['rgb(255,99,132)', 'rgb(14,99,132)'],
-                  borderColor: ['rgb(255,991,130)'],
-                  data: [<?= $countPlant ?>]
-                }]
-              },
-              options: {
-                scales: {
-                  y: {
-                    min: 0,
-                    beginAtZero: true,
-                  }
-                },
-                animation: {
-                  duration: 1000
+        <script>
+          var ctx = document.getElementById('qualityChart').getContext('2d');
+          var chart = new Chart(ctx, {
+            type: 'bar',
+            responsive: true,
+            data: {
+              labels: [<?= $qualityPlant ?>],
+              datasets: [{
+                label: 'Kualitas Tanaman',
+                backgroundColor: ['rgb(255,99,132)', 'rgb(14,99,132)'],
+                borderColor: ['rgb(255,991,130)'],
+                data: [<?= $countPlant ?>]
+              }]
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true
                 }
+              },
+              animation: {
+                duration: 1000
               }
-            });
-
-            // Set width and height
-            chart.canvas.style.width = '100%'; // Set your desired width
-            chart.canvas.style.height = 'auto'; // Set your desired height
-          </script>
-        </canvas>
+            }
+          });
+        </script>
       </div>
       <!-- Top Three Penjualan -->
       <div class="flex-1 flex gap-2 flex-col bg-gray-300 rounded-lg shadow-lg p-5">
@@ -73,52 +67,47 @@
       <!-- grafik count status request -->
       <div class="flex-[3] bg-gray-300 rounded-lg shadow-lg p-5">
         <h1 class="text-xl font-bold">Grafik Status Request</h1>
-        <canvas id="statusChart" class="relative">
-          <?php
-          $statusPlant = "";
-          $countStatusPlant = "";
+        <canvas id="statusChart" style="position: relative;"></canvas>
+        <?php
+        $statusPlant = "";
+        $countStatusPlant = "";
 
-          foreach ($requestsCount as $row) :
-            $sts = esc($row["status"]);
-            $statusPlant .= "'$sts'" . ",";
+        foreach ($requestsCount as $row) :
+          $sts = esc($row["status"]);
+          $statusPlant .= "'$sts'" . ",";
 
-            $cntStatus = esc($row["statusCount"]);
-            $countStatusPlant .= "'$cntStatus'" . ",";
-          endforeach;
-          ?>
+          $cntStatus = esc($row["statusCount"]);
+          $countStatusPlant .= "'$cntStatus'" . ",";
+        endforeach;
+        ?>
 
-          <script>
-            var ctx = document.getElementById('statusChart').getContext('2d');
-            var chart = new Chart(ctx, {
-              type: 'bar',
-              responsive: true,
-              data: {
-                labels: [<?= $statusPlant ?>],
-                datasets: [{
-                  label: 'Status Request Tanaman',
-                  backgroundColor: ['rgb(255,99,132)', 'rgb(14,99,132)'],
-                  borderColor: ['rgb(255,991,130)'],
-                  data: [<?= $countStatusPlant ?>]
-                }]
-              },
-              options: {
-                scales: {
-                  y: {
-                    min: 0,
-                    beginAtZero: true
-                  }
-                },
-                animation: {
-                  duration: 1000
+        <script>
+          var ctx = document.getElementById('statusChart').getContext('2d');
+          var chart = new Chart(ctx, {
+            type: 'bar',
+            responsive: true,
+            data: {
+              labels: [<?= $statusPlant ?>],
+              datasets: [{
+                label: 'Status Request Tanaman',
+                backgroundColor: ['rgb(255,99,132)', 'rgb(14,99,132)'],
+                borderColor: ['rgb(255,991,130)'],
+                data: [<?= $countStatusPlant ?>]
+              }]
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true
                 }
+              },
+              animation: {
+                duration: 1000
               }
-            });
+            }
+          });
+        </script>
 
-            // Set width and height
-            chart.canvas.style.width = '100%'; // Set your desired width
-            chart.canvas.style.height = 'auto'; // Set your desired height
-          </script>
-        </canvas>
       </div>
       <!-- Latest Request -->
       <div class="flex-1 flex gap-1 flex-col bg-gray-300 rounded-lg shadow-lg p-5">
