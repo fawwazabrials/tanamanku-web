@@ -36,6 +36,7 @@ class LoginController extends BaseController
 
     if ($cek == 1) {
       session()->set('num_user', $cek);
+      session()->set('adminId', $model->getAdminId($email, $password));
       return redirect()->to('/');
     } else {
       session()->setFlashdata('error', 'Email atau Password salah');

@@ -99,7 +99,7 @@
     <!-- recently edit -->
     <div class="flex-1 flex flex-col rounded-lg bg-gray-100 p-5 border border-gray-300">
       <h1 class="text-3xl font-bold">Recently Edit</h1>
-      <div class="flex flex-col gap-3 mt-5 flex-1 justify-center">
+      <div class="flex flex-col gap-3 mt-5 flex-1 <?= $plantWithEditAndAdmin == null ? 'justify-center' : '' ?>">
         <?php if ($plantWithEditAndAdmin == null) : ?>
           <p class="text-center">No Data</p>
         <?php endif; ?>

@@ -7,7 +7,15 @@ use CodeIgniter\Model;
 class EditModel extends Model
 {
   protected $table = 'edit';
-  protected $useTimestamps = true;
+  protected $useTimestamps = false;
   protected $allowedFields = ['tanamanId', 'adminId', 'createdAt'];
 
+  public function getEdit($id = false)
+  {
+    if ($id == false) {
+      return $this->findAll();
+    }
+
+    return $this->where(['id' => $id])->first();
+  }
 }
