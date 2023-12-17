@@ -9,11 +9,11 @@
   <div class="flex flex-col gap-5 grow h-full">
     <h1 class="text-2xl md:text-4xl font-bold gap-3">Dashboard</h1>
     <!-- row 1 -->
-    <div class="flex flex-1 flex-row gap-5">
+    <div class="flex flex-1 flex-row gap-5" sty>
       <!-- grafik count Quality -->
-      <div class="flex-[3] bg-gray-300 rounded-lg shadow-lg p-5">
+      <div class="container bg-gray-300 rounded-lg shadow-lg p-5" style="width: 75%">
         <h1 class="text-xl font-bold">Grafik Quality</h1>
-        <canvas id="qualityChart" style="position: relative;"></canvas>
+        <canvas id="qualityChart"></canvas>
         <?php
         $qualityPlant = "";
         $countPlant = "";
@@ -55,7 +55,7 @@
         </script>
       </div>
       <!-- Top Three Penjualan -->
-      <div class="flex-1 flex gap-2 flex-col bg-gray-300 rounded-lg shadow-lg p-5">
+      <div class="container flex gap-2 flex-col bg-gray-300 rounded-lg shadow-lg p-5" style="width: 25%">
         <h1 class="text-xl font-bold">Top 3 Penjualan</h1>
         <div class="flex grow items-center justify-center">
           No Data
@@ -65,9 +65,9 @@
     <!-- row 2 -->
     <div class="flex flex-1 flex-row gap-5">
       <!-- grafik count status request -->
-      <div class="flex-[3] bg-gray-300 rounded-lg shadow-lg p-5">
+      <div class="container bg-gray-300 rounded-lg shadow-lg p-5" style="width: 75%">
         <h1 class="text-xl font-bold">Grafik Status Request</h1>
-        <canvas id="statusChart" style="position: relative;"></canvas>
+        <canvas id="statusChart"></canvas>
         <?php
         $statusPlant = "";
         $countStatusPlant = "";
@@ -110,7 +110,7 @@
 
       </div>
       <!-- Latest Request -->
-      <div class="flex-1 flex gap-1 flex-col bg-gray-300 rounded-lg shadow-lg p-5">
+      <div class="container flex gap-1 flex-col bg-gray-300 rounded-lg shadow-lg p-5" style="width: 25%">
         <h1 class="text-xl font-bold">Latest Request</h1>
         <div class="flex flex-col gap-3 mt-5 overflow-x-hidden <?= $newestPendingRequests == null ? 'justify-center' : '' ?>">
           <?php if ($newestPendingRequests == null) : ?>
