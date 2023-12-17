@@ -16,7 +16,7 @@ class PlantsModel extends Model
       return $this->findAll();
     }
 
-    return $this->where(['id' => $id])->first(); 
+    return $this->where(['id' => $id])->first();
   }
 
   public function getPlantsWithEditAndAdmin($id = false)
@@ -25,11 +25,11 @@ class PlantsModel extends Model
 
     if ($id == false) {
       return $this->join('edit', 'edit.tanamanId = tanaman.id')
-      ->join('admin', 'admin.id = edit.adminId')
-      ->orderBy('edit.createdAt', 'DESC')
-      ->limit(3)
-      ->get()
-      ->getResult();
+        ->join('admin', 'admin.id = edit.adminId')
+        ->orderBy('edit.createdAt', 'DESC')
+        ->limit(3)
+        ->get()
+        ->getResult();
     }
 
     return $this->join('edit', 'edit.tanamanId = tanaman.id')
@@ -44,7 +44,7 @@ class PlantsModel extends Model
   public function getQualityCount()
   {
     $this->select('quality, COUNT(quality) as qualityCount');
-    $this->groupBy('quality')->limit(3);
+    $this->groupBy('quality');
     return $this->findAll();
   }
 }
