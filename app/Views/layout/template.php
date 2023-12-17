@@ -13,7 +13,7 @@
 
     <div class="flex">
         <?= $this->include('layout/sidebar') ?>
-        <div class="w-full h-screen overflow-x-hidden bg-gray-100 overflow-y-scroll">
+        <div class="w-full h-screen overflow-x-hidden bg-gray-100">
             <?= $this->renderSection('content') ?>
         </div>
     </div>
