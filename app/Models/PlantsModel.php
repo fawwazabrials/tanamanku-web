@@ -44,7 +44,7 @@ class PlantsModel extends Model
   public function getQualityCount()
   {
     $this->select('quality, COUNT(quality) as qualityCount');
-    $this->groupBy('quality');
+    $this->groupBy('quality')->limit(3);
     return $this->findAll();
   }
 }

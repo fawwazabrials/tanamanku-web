@@ -39,7 +39,7 @@ class RequestsModel extends Model
   public function getStatusCount()
   {
     $this->select('status, COUNT(status) as statusCount');
-    $this->groupBy('status');
+    $this->groupBy('status')->limit(3);
     return $this->findAll();
   }
 }
