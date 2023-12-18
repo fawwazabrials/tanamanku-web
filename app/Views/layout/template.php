@@ -10,7 +10,6 @@
 </head>
 
 <body>
-
     <div class="flex">
         <?= $this->include('layout/sidebar') ?>
         <div class="w-full h-screen overflow-x-hidden bg-gray-100">
