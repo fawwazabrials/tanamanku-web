@@ -14,10 +14,10 @@
       <?php endif; ?>
       <div class="border rounded-lg divide-y divide-gray-200 ">
         <div class="py-3 px-4 flex justify-between">
-          <div class="relative max-w-xs">
+          <div class="relative flex items-center max-w-xs h-auto">
             <label class="sr-only">Search</label>
             <input type="text" name="hs-table-with-pagination-search" id="hs-table-with-pagination-search" class="py-2 px-3 ps-9 block w-full border border-gray-300 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none " placeholder="Search for items" oninput="searchPlants()" />
-            <div class="absolute top-0 bottom-3 start-0 flex items-center pointer-events-none ps-3">
+            <div class="absolute top-0 bottom-0 start-0 flex items-center pointer-events-none ps-3">
               <svg class="h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="11" cy="11" r="8" />
                 <path d="m21 21-4.3-4.3" />

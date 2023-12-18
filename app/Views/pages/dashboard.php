@@ -3,13 +3,13 @@
 
 <?= $this->section("content") ?>
 
-<script src="/assets/js/Chart.bundle.min.js"></script>
+<script src="<?= base_url() ?>/assets/js/Chart.bundle.min.js"></script>
 
 <div class="h-screen">
   <div class="p-10 h-full flex flex-col gap-5 grow overflow-y-scroll">
     <h1 class="text-2xl md:text-4xl font-bold gap-3">Dashboard</h1>
     <!-- row 1 -->
-    <div class="flex flex-1 flex-col lg:flex-row gap-5 h-full">
+    <div class="flex flex-1 flex-col lg:flex-row gap-5 h-auto">
       <!-- grafik count Quality -->
       <div class=" bg-gray-300 rounded-lg shadow-lg p-5 lg:w-3/4 h-full w-full flex flex-col gap-4">
         <h1 class="text-xl font-bold">Grafik Kualitas Tanaman</h1>
@@ -50,26 +50,42 @@
                   },
                   plugins: {
                     legend: {
-                      display: false // Menghilangkan legenda
+                      display: false
                     }
                   }
                 }
               });
-              // set height and width of chart fit to parent
             </script>
           </canvas>
         </div>
       </div>
       <!-- Top Three Penjualan -->
-      <div class=" flex gap-2 flex-col bg-gray-300 rounded-lg shadow-lg p-5 lg:w-1/4 w-full">
-        <h1 class="text-xl font-bold">Top 3 Penjualan</h1>
-        <div class="flex grow items-center justify-center">
-          No Data
+      <div class="lg:w-1/4 w-full h-full">
+        <div class="flex gap-1 flex-col bg-gray-300 rounded-lg shadow-lg p-5 ">
+          <h1 class="text-xl font-bold text-center lg:text-start">Top 3 Penjualan</h1>
+          <div class="flex  mt-5 min-h-[75px] <?= !$dataOrders ? 'justify-center' : '' ?>">
+            <?php if (!boolval($dataOrders)) : ?>
+              <p class="text-center">No Data</p>
+            <?php endif; ?>
+            <div class="w-auto flex flex-col items-start gap-3">
+              <?php foreach ($dataOrders as $dataOrder) : ?>
+                <div class="flex justify-center lg:justify-between items-stretch">
+                  <div class="flex gap-3 items-center">
+                    <img src="/img/plants/<?= $dataOrder['image'] ?>" alt="admin" class="w-16 h-16 object-cover rounded-lg">
+                    <div class="flex flex-col">
+                      <h1 class="font-semibold text-md"><?= $dataOrder['name'] ?></h1>
+                      <p class="text-sm">Jumlah: <?= $dataOrder['amount'] ?></p>
+                    </div>
+                  </div>
+                </div>
+              <?php endforeach; ?>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <!-- row 2 -->
-    <div class="flex flex-1 flex-col lg:flex-row gap-5 h-full">
+    <div class="flex flex-1 flex-col lg:flex-row gap-5 h-auto">
       <!-- grafik count status request -->
       <div class=" bg-gray-300 rounded-lg shadow-lg p-5 lg:w-3/4 w-full h-full flex flex-col gap-4">
         <h1 class="text-xl font-bold">Grafik Status Requests</h1>
@@ -94,7 +110,7 @@
                   labels: [<?= $statusPlant ?>],
                   datasets: [{
                     label: 'Status Request Tanaman',
-                    backgroundColor: ['rgb(234,179,8)', 'rgb(59 130 246)', 'rgb(239,68,68)', ],
+                    backgroundColor: ['rgb(234,179,8)', 'rgb(34,197,94)', 'rgb(239,68,68)', ],
                     borderColor: ['rgb(255,991,130)'],
                     data: [<?= $countStatusPlant ?>]
                   }]
@@ -110,40 +126,43 @@
                   },
                   plugins: {
                     legend: {
-                      display: false // Menghilangkan legenda
+                      display: false
                     }
                   }
                 }
               });
-              // set height and width of chart fit to parent
             </script>
           </canvas>
         </div>
       </div>
       <!-- Latest Request -->
-      <div class="flex gap-1 flex-col bg-gray-300 rounded-lg shadow-lg p-5 lg:w-1/4 w-full">
-        <h1 class="text-xl font-bold text-center lg:text-start">Latest Request</h1>
-        <div class="flex flex-col gap-3 mt-5 <?= $newestPendingRequests == null ? 'justify-center' : '' ?>">
-          <?php if ($newestPendingRequests == null) : ?>
-            <p class="text-center">No Data</p>
-          <?php endif; ?>
-          <?php foreach ($newestPendingRequests as $request) : ?>
-            <?php
-            $timestamp = strtotime($request['created_at']);
-            $formattedDate = date('d-m-Y', $timestamp);
-            $formattedTime = date('H:i:s', $timestamp);
-            ?>
-            <div class="flex justify-center lg:justify-between items-stretch">
-              <div class="flex gap-3 items-center">
-                <img src="/img/plants/<?= $request['gambarTanaman'] ?>" alt="admin" class="w-16 h-16 object-cover rounded-lg">
-                <div class="flex flex-col">
-                  <h1 class="font-semibold text-md"><?= $request['namaTanaman'] ?></h1>
-                  <p class="text-sm flex">Requester: <?= $request['nama_requester'] ?></p>
-                  <p class="text-sm">Tanggal: <?= $formattedDate ?>, <?= $formattedTime ?></p>
+      <div class="lg:w-1/4 w-full">
+        <div class="flex gap-1 flex-col bg-gray-300 rounded-lg shadow-lg p-5 ">
+          <h1 class="text-xl font-bold text-center lg:text-start">Latest Request</h1>
+          <div class="flex mt-5 min-h-[75px] <?= !$newestPendingRequests ? 'justify-center' : '' ?>">
+            <?php if ($newestPendingRequests == null) : ?>
+              <p class="text-center">No Data</p>
+            <?php endif; ?>
+            <div class="w-auto flex flex-col items-start gap-3">
+              <?php foreach ($newestPendingRequests as $request) : ?>
+                <?php
+                $timestamp = strtotime($request['created_at']);
+                $formattedDate = date('d-m-Y', $timestamp);
+                $formattedTime = date('H:i:s', $timestamp);
+                ?>
+                <div class="flex justify-center lg:justify-between items-stretch">
+                  <div class="flex gap-3 items-center">
+                    <img src="/img/plants/<?= $request['gambarTanaman'] ?>" alt="admin" class="w-16 h-16 object-cover rounded-lg">
+                    <div class="flex flex-col">
+                      <h1 class="font-semibold text-md"><?= $request['namaTanaman'] ?></h1>
+                      <p class="text-sm flex">Requester: <?= $request['nama_requester'] ?></p>
+                      <p class="text-sm">Tanggal: <?= $formattedDate ?>, <?= $formattedTime ?></p>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              <?php endforeach; ?>
             </div>
-          <?php endforeach; ?>
+          </div>
         </div>
       </div>
     </div>

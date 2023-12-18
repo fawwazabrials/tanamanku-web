@@ -24,7 +24,8 @@ class Tanaman extends Migration
                 'constraint' => '100',
             ],
             'soil_moisture' => [
-                'type'       => 'INT',
+                'type'       => 'DECIMAL',
+                'constraint' => '5,1',
                 'default'   => 0,
             ],
             'temperature'   => [
