@@ -1,0 +1,47 @@
+version: "3.8"
+name: tanamanku-web
+services:
+    # Application
+    tanamanku-app:
+        build:
+            context: ./docker/services/app
+            dockerfile: app.dockerfile
+        working_dir: /var/www
+        env_file: .env
+        volumes:
+            - ./:/var/www
+        networks:
+            - gf-network
+
+    # Web Server
+    tanamanku-web:
+        build:
+            context: ./docker/services/web
+            dockerfile: web.dockerfile
+        working_dir: /var/www
+        restart: always
+        volumes:
+            - ./:/var/www
+        ports:
+            - "8081:81"
+        networks:
+            - gf-network
+
+    # Database
+    tanamanku-database:
+        image: mysql:8.0.25
+        volumes:
+            - ./docker/volumes/mysql:/var/lib/mysql
+        environment:
+            MYSQL_DATABASE: tanamanku
+            MYSQL_ALLOW_EMPTY_PASSWORD: true
+            MYSQL_TCP_PORT: 3308
+        ports:
+            - "3308:3308"
+        networks:
+            - gf-network
+
+networks:
+    gf-network:
+        name: "grocery-farming-network"
+        external: true
