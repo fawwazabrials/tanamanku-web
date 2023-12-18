@@ -15,15 +15,10 @@ class RequestsModel extends Model
     $this->select('requests.*, tanaman.namaTanaman');
 
     if ($id == false) {
-      return $this->join('tanaman', 'tanaman.id = requests.tanamanId')
-        ->orderBy('requests.status', 'ASC')
-        ->orderBy('requests.created_at', 'DESC')
-        ->findAll();
+      return $this->join('tanaman', 'tanaman.id = requests.tanamanId')->orderBy('requests.status', 'ASC')->orderBy('requests.created_at', 'DESC')->findAll();
     }
 
-    return $this->where(['tanaman.id' => $id])
-      ->join('tanaman', 'tanaman.id = requests.tanamanId')
-      ->first();
+    return $this->join('tanaman', 'tanaman.id = requests.tanamanId')->find($id);
   }
 
   public function getPendingRequests() // buat dashboard admin
