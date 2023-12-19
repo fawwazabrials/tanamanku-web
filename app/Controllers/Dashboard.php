@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\PlantsModel;
 use App\Models\RequestsModel;
+use Exception;
 
 class Dashboard extends BaseController
 {
@@ -35,16 +36,20 @@ class Dashboard extends BaseController
         ];
         $client = \Config\Services::curlrequest($curlOptions);
 
-        $response = $client->request('GET', '/api/order/report?email=' . getenv('GREENBOX_API_SECRET_EMAIL') . '&password=' . getenv('GREENBOX_API_SECRET_PASSWORD'));
-        $dataResponse = json_decode($response->getBody(), true);
-        $dataOrders = $dataResponse['data'];
-        usort($dataOrders, function ($a, $b) {
-            return $b['amount'] <=> $a['amount'];
-        });
-        $dataOrders = array_slice($dataOrders, 0, 3);
-
-        foreach ($dataOrders as $key => $value) {
-            $dataOrders[$key]['image'] = $this->plantsModel->where(['namaTanaman' => $value['name']])->first()['image'];
+        try {
+            $response = $client->request('GET', '/api/order/report?email=' . getenv('GREENBOX_API_SECRET_EMAIL') . '&password=' . getenv('GREENBOX_API_SECRET_PASSWORD'));
+            $dataResponse = json_decode($response->getBody(), true);
+            $dataOrders = $dataResponse['data'];
+            usort($dataOrders, function ($a, $b) {
+                return $b['amount'] <=> $a['amount'];
+            });
+            $dataOrders = array_slice($dataOrders, 0, 3);
+    
+            foreach ($dataOrders as $key => $value) {
+                $dataOrders[$key]['image'] = $this->plantsModel->where(['namaTanaman' => $value['name']])->first()['image'];
+            }
+        } catch (Exception $e) {
+            $dataOrders = [];
         }
 
         $qualityCount = $this->plantsModel->getQualityCount();
