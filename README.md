@@ -1,67 +1,72 @@
-# CodeIgniter 4 Application Starter
+# Tanamanku
 
-## What is CodeIgniter?
+## Description
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+Tanamanku adalah sebuah aplikasi smart farming. Aplikasi ini akan berinteraksi dengan Greenbox yang sebelumnya sudah dibuat ([Github Repo](https://github.com/fawwazabrials/greenbox-web)).
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+## Daftar Isi
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+-   [Technology Stack](#technology-stack)
+-   [Requirements](#requirements)
+-   [How To Run](#how-to-run)
+-   [Created By](#created-by)
 
-The user guide corresponding to the latest version of the framework can be found
-[here](https://codeigniter4.github.io/userguide/).
+## Technology Stack
 
-## Installation & updates
+-   Codeigniter v4.4.3
+-   Tailwind v3.3
+-   MySQL v8.0.25
+-   Nginx v1.25.3
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+## Requirements
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+Pastikan anda bisa menjalankan command `make`, silahkan ikutin [tutorial ini](https://leangaurav.medium.com/how-to-setup-install-gnu-make-on-windows-324480f1da69) untuk meng-install make. Jika menggunakan Docker, pastikan Docker sudah terinstall di mesin. Pastikan juga container [Greenbox](https://github.com/fawwazabrials/greenbox-web) sedang berjalan.
 
-## Setup
+## How To Run
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+Terdapat 3 jenis cara yang bisa dilakukan untuk menjalankan aplikasi. Pilihan 1 adalah pilihan paling mudah dengan mengakses URL yang sudah dihosting di cloud server. Pilihan 2 adalah dengan menjalankan menggunakan Docker sehingga tidak perlu meng-konfigurasi database dan web server. Pilihan 3 adalah dengan menjalankan di localhost sendiri dengan bantuan XAMPP.
 
-## Important Change with index.php
+### 1. URL Cloud Deployment
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+Kunjungi website pada URL [http://34.101.121.47](http://34.101.121.47)
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+### 2. Setup Menggunakan Docker
 
-**Please** read the user guide for a better explanation of how CI4 works!
+1. Clone repository ini
+2. Jalankan aplikasi docker
+3. Jika belum, jalankan container [Greenbox](https://github.com/fawwazabrials/greenbox-web). PASTIKAN CONTAINER GREENBOX SUDAH PERNAH BERJALAN SEKALI.
+4. Ketik `make setup` pada Terminal / Command Prompt
+5. Jika terdapat error pada bagian migration, jalankan `make migrate`
+6. Kunjungi website pada url [localhost:8081](localhost:8081)
+7. Matikan website dengan menjalani `make stop`
+8. Jika website ingin dijalankan lagi, ketik `make run`
 
-## Repository Management
+Bila tidak mempunyai Makefile, berikut adalah translasi command makefile ke command aslinya
+| Makefile | Command |
+|---------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| make build | docker-compose build --no-cache --force-rm |
+| make run | docker-compose up -d |
+| make composer-setup | composer install |
+| make migrate | docker exec greenbox-web-greenbox-app-1 bash -c "yes | php spark migrate:refresh" || docker exec greenbox-web-greenbox-app-1 bash -c "php spark db:seed AllSeeder" |
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+### 3. Setup Menggunakan Lokal
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+1. Clone repository ini
+2. Jalankan aplikasi XAMPP dan nyalakan Apache dan MySQL
+3. Buatlah database dengan nama `tanamanku`
+4. Ubah isi `.env.example` dengan menggunakan konfigurasi untuk lokal
+5. Duplikat `.env.example` kemudian rename menjadi `.env`
+6. Ketik `composer install` pada Terminal / Command Prompt
+7. Jalankan migrasi dan seeding dengan mengetik command `yes | php spark migrate:refresh || php spark db:seed AllSeeder`
+8. Jika belum, jalankan localhost [Tanamanku](https://github.com/fawwazabrials/tanamanku-web)
+9. Jalankan command `php spark serve` untuk menjalankan website
+10. Kunjungi website pada url [localhost:8081](localhost:8081)
+11. Jika website ingin dijalankan lagi, tidak perlu melakukan migrasi lagi
 
-## Server Requirements
+## Created by
 
-PHP version 7.4 or higher is required, with the following extensions installed:
-
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
-
-> **Warning**
-> The end of life date for PHP 7.4 was November 28, 2022. If you are
-> still using PHP 7.4, you should upgrade immediately. The end of life date
-> for PHP 8.0 will be November 26, 2023.
-
-Additionally, make sure that the following extensions are enabled in your PHP:
-
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+| No  | NIM      | Nama                |
+| --- | -------- | ------------------- |
+| 1   | 18221051 | Luthfi Hanif        |
+| 2   | 18221067 | Fawwaz Abrial Saffa |
+| 3   | 18221071 | Ahmad Rizki         |
